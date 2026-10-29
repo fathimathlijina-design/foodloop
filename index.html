@@ -641,6 +641,19 @@ footer p {
         width: 100%;
     }
 }
+main > section {
+    display: none;
+}
+
+main > section.is-active {
+    display: block;
+}
+
+nav a.active {
+    background: var(--mint);
+    color: var(--green);
+}
+
 </style>
 </head>
 
@@ -2082,8 +2095,40 @@ function renderAll() {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-renderAll();
-renderRecipes(matchingRecipes());
+function showPage(pageId) {
+    const page = document.getElementById(pageId);
+
+    if (!page || !page.matches("main > section")) {
+        return;
+    }
+
+    document.querySelectorAll("main > section").forEach(section => {
+        section.classList.remove("is-active");
+    });
+
+    page.classList.add("is-active");
+
+    document.querySelectorAll("nav a").forEach(link => {
+        const active = link.getAttribute("href") === "#" + pageId;
+        link.classList.toggle("active", active);
+    });
+
+    window.scrollTo(0, 0);
+}
+
+document.addEventListener("click", event => {
+    const link = event.target.closest('a[href^="#"]');
+
+    if (!link) return;
+
+    const pageId = link.getAttribute("href").slice(1);
+    const page = document.getElementById(pageId);
+
+    if (page && page.matches("main > section")) {
+        event.preventDefault();
+        showPage(pageId);
+    }
+});
 </script>
 
 </body>
