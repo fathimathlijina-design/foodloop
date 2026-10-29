@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodLoop | Save Food, Save Money</title>
+
+<style>
+:root {
+    --green: #176b45;
+    --dark: #103d2b;
+    --mint: #e4f5e9;
+    --cream: #faf9f3;
+    --white: #ffffff;
+    --orange: #ed9b40;
+    --text: #24352b;
+    --muted: #718076;
+    --border: #e5ebe5;
+    --shadow: 0 8px 30px rgba(20,70,43,.07);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible,
+input:focus-visible, select:focus-visible {
+    outline: 3px solid #8ad5a8;
+    outline-offset: 3px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    max-width: 1250px;
+    margin: auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    color: var(--green);
+    font-size: 25px;
+    font-weight: 850;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--orange);
+}
+
+nav {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 650;
+    padding: 9px 11px;
+    border-radius: 9px;
+}
+
+nav a:hover {
+    background: var(--mint);
+    color: var(--green);
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 0 24px;
+}
+
+.hero {
+    padding: 75px 0;
+    background:
+        radial-gradient(circle at 85% 20%, #d8f2df 0, transparent 32%),
+        linear-gradient(135deg, #f8fbf3, #eaf6e9);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.eyebrow {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 30px;
+    background: #dcefe0;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: var(--dark);
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 22px;
+}
+
+h1 span {
+    color: var(--green);
+}
+
+.hero p {
+    max-width: 550px;
+    font-size: 17px;
+    color: #64736a;
+    margin-bottom: 28px;
+}
+
+.btn {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 17px;
+    font-weight: 750;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(.97);
+}
+
+.primary {
+    background: var(--green);
+    color: white;
+}
+
+.secondary {
+    background: var(--mint);
+    color: var(--green);
+}
+
+.danger {
+    background: #ffeded;
+    color: #a63232;
+}
+
+.orange {
+    background: #fff0dc;
+    color: #955717;
+}
+
+.hero-art {
+    background: white;
+    padding: 32px;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transform: rotate(1deg);
+}
+
+.hero-emoji {
+    font-size: 105px;
+    margin: 10px;
+}
+
+.hero-art h3 {
+    color: var(--dark);
+    font-size: 23px;
+}
+
+.hero-art p {
+    margin: 10px auto;
+    font-size: 14px;
+}
+
+.pill {
+    display: inline-block;
+    background: var(--mint);
+    color: var(--green);
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+    padding-top: 35px;
+}
+
+.stat, .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 23px;
+    box-shadow: var(--shadow);
+}
+
+.stat .icon {
+    font-size: 26px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 29px;
+    color: var(--dark);
+    margin-top: 7px;
+}
+
+.stat p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+section {
+    padding: 65px 0;
+}
+
+.section-head {
+    margin-bottom: 28px;
+}
+
+.section-head .eyebrow {
+    margin-bottom: 9px;
+}
+
+.section-head h2 {
+    color: var(--dark);
+    font-size: clamp(27px, 4vw, 36px);
+    letter-spacing: -.7px;
+}
+
+.section-head p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.card h3 {
+    color: var(--dark);
+    font-size: 19px;
+    margin-bottom: 13px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 750;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    border: 1px solid #dce5dd;
+    background: white;
+    border-radius: 9px;
+    padding: 11px 12px;
+    color: var(--text);
+    margin-bottom: 13px;
+    min-width: 0;
+}
+
+input:focus, select:focus {
+    border-color: var(--green);
+    outline: 2px solid #d5f0dc;
+}
+
+.form-actions {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.list {
+    display: grid;
+    gap: 11px;
+}
+
+.item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.item-main {
+    flex: 1;
+    min-width: 130px;
+}
+
+.item-main strong {
+    color: var(--dark);
+    display: block;
+}
+
+.item-main small {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    border: 0;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.badge {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 4px 9px;
+    font-size: 11px;
+    font-weight: 800;
+    background: var(--mint);
+    color: var(--green);
+}
+
+.badge.warning {
+    background: #fff0d8;
+    color: #92510b;
+}
+
+.badge.danger-badge {
+    background: #ffeded;
+    color: #a63232;
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 25px 12px;
+    background: #fafcf9;
+    border: 1px dashed #dce5dd;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.notice {
+    background: #fff7e8;
+    color: #82521b;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.green-box {
+    background: linear-gradient(120deg, #e0f4e4, #f4faed);
+    padding: 20px;
+    border-radius: 13px;
+    margin-bottom: 18px;
+}
+
+.green-box strong {
+    color: var(--green);
+    font-size: 25px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.recipe {
+    background: #fafcf8;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 16px;
+}
+
+.recipe .emoji {
+    font-size: 34px;
+}
+
+.recipe h4 {
+    color: var(--dark);
+    margin: 5px 0;
+}
+
+.recipe p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.recipe small {
+    display: block;
+    margin: 8px 0;
+}
+
+.day-card {
+    background: #f9fcf8;
+    padding: 13px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.day-card h4 {
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.challenge {
+    background: linear-gradient(130deg, #153f2d, #237a4d);
+    color: white;
+    border-radius: 19px;
+    padding: 28px;
+}
+
+.challenge h3 {
+    color: white;
+    font-size: 24px;
+}
+
+.challenge p {
+    color: #dcefe0;
+    margin: 10px 0 18px;
+}
+
+.challenge .btn {
+    background: white;
+    color: var(--green);
+}
+
+.challenge .score {
+    font-size: 34px;
+    font-weight: 850;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.feature {
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.feature span {
+    font-size: 29px;
+}
+
+.feature h3 {
+    font-size: 15px;
+    margin: 9px 0 5px;
+    color: var(--dark);
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer {
+    background: #103d2b;
+    color: white;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+footer p {
+    color: #cce2d2;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 200;
+    background: #103d2b;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: none;
+    max-width: calc(100% - 40px);
+}
+
+@media(max-width: 900px) {
+    .nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-art {
+        max-width: 430px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding: 48px 0;
+    }
+
+    section {
+        padding: 45px 0;
+    }
+
+    .grid, .recipe-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat, .card {
+        padding: 16px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat strong {
+        font-size: 24px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .feature {
+        padding: 13px;
+    }
+
+    .item-actions {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <a class="logo" href="#home">🌿 Food<span>Loop</span></a>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#pantry">My Pantry</a>
+            <a href="#expiry">Expiry</a>
+            <a href="#recipes">Recipes</a>
+            <a href="#shopping">Shopping</a>
+            <a href="#planner">Meal Planner</a>
+            <a href="#savings">Savings</a>
+            <a href="#about">About</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- HOMEPAGE -->
+<section class="hero" id="home">
+    <div class="container hero-grid">
+        <div>
+            <span class="eyebrow">🌎 A SMARTER, GREENER KITCHEN</span>
+
+            <h1>Save Food.<br><span>Save Money.</span><br>Live Better.</h1>
+
+            <p>
+                Your personal kitchen companion to reduce food waste,
+                discover delicious recipes, manage your pantry and
+                make every rupee count.
+            </p>
+
+            <a class="btn primary" href="#dashboard"
+               style="text-decoration:none">Explore FoodLoop →</a>
+
+            <a class="btn secondary" href="#pantry"
+               style="text-decoration:none;margin-left:6px">
+               Add Food +
+            </a>
+        </div>
+
+        <div class="hero-art">
+            <div class="hero-emoji">🥑 🥕 🥦</div>
+            <h3>A little less waste.<br>A lot more goodness.</h3>
+            <p>Every ingredient deserves a purpose.</p>
+            <span class="pill">YOUR KITCHEN, REIMAGINED</span>
+        </div>
+    </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">YOUR OVERVIEW</span>
+        <h2>Welcome to your dashboard 👋</h2>
+        <p>Keep track of your food, your progress and your savings.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <span class="icon">🥬</span>
+            <strong id="statFood">0</strong>
+            <p>Items in pantry</p>
+        </div>
+
+        <div class="stat">
+            <span class="icon">⏰</span>
+            <strong id="statExpiry">0</strong>
+            <p>Expiring within 3 days</p>
+        </div>
+
+        <div class="stat">
+            <span class="icon">💰</span>
+            <strong id="statSavings">₹0</strong>
+            <p>Estimated savings</p>
+        </div>
+
+        <div class="stat">
+            <span class="icon">🏆</span>
+            <strong id="statPoints">0</strong>
+            <p>Challenge points</p>
+        </div>
+    </div>
+
+    <div style="margin-top:25px" class="card">
+        <h3>🔔 Kitchen alerts</h3>
+        <div id="dashboardAlerts" class="list"></div>
+    </div>
+</div>
+</section>
+
+<!-- INVENTORY -->
+<section id="pantry">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURE 02</span>
+        <h2>🥬 My Food Pantry</h2>
+        <p>Add food items, manage quantities and track their value.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3 id="foodFormTitle">Add a food item</h3>
+
+            <form id="foodForm">
+                <input type="hidden" id="foodId">
+
+                <label for="foodName">Food name</label>
+                <input id="foodName" required maxlength="80"
+                       placeholder="e.g. Tomatoes">
+
+                <div class="form-grid">
+                    <div>
+                        <label for="foodCategory">Category</label>
+                        <select id="foodCategory">
+                            <option>Vegetables</option>
+                            <option>Fruits</option>
+                            <option>Dairy</option>
+                            <option>Grains</option>
+                            <option>Meat & Fish</option>
+                            <option>Leftovers</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="foodQty">Quantity</label>
+                        <input id="foodQty" type="number"
+                               min="0.01" step="any" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div>
+                        <label for="foodPrice">Total food value (₹)</label>
+                        <input id="foodPrice" type="number"
+                               min="0" step="0.01" placeholder="50" required>
+                    </div>
+
+                    <div>
+                        <label for="foodExpiry">Expiry date</label>
+                        <input id="foodExpiry" type="date" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn primary" type="submit"
+                            id="foodSubmit">+ Add Food</button>
+                    <button class="btn secondary" type="button"
+                            id="foodCancel" hidden>Cancel edit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>📦 Your inventory</h3>
+
+            <input id="foodSearch" type="search"
+                   placeholder="🔍 Search food items...">
+
+            <select id="foodFilter">
+                <option value="all">All food items</option>
+                <option value="expiring">Expiring soon</option>
+                <option value="expired">Past expiry date</option>
+            </select>
+
+            <div id="foodList" class="list"></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- EXPIRY -->
+<section id="expiry">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURES 03 & 04</span>
+        <h2>⏰ Expiry Tracker & Alerts</h2>
+        <p>Find food that needs attention before it goes to waste.</p>
+    </div>
+
+    <div class="card">
+        <div class="notice">
+            ⚠️ These reminders use the dates you enter. Always check
+            the food's condition and follow appropriate food-safety guidance.
+        </div>
+
+        <div id="expiryList" class="list"></div>
+    </div>
+</div>
+</section>
+
+<!-- RECIPES -->
+<section id="recipes">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURES 07, 08, 09 & 11</span>
+        <h2>🍳 Your Recipe Studio</h2>
+        <p>Turn ingredients into ideas instead of waste.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>🥕 Recipe Generator</h3>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:12px">
+                Use ingredients from your pantry or type your own.
+            </p>
+
+            <label for="recipeIngredients">Available ingredients</label>
+            <input id="recipeIngredients"
+                   placeholder="e.g. potato, onion, tomato">
+
+            <div class="form-actions">
+                <button class="btn primary" id="generateRecipes">
+                    Find recipes ✨
+                </button>
+
+                <button class="btn secondary" id="surpriseRecipe">
+                    🎲 Surprise Me
+                </button>
+            </div>
+
+            <div style="margin-top:20px">
+                <label for="recipeMode">Recipe collection</label>
+                <select id="recipeMode">
+                    <option value="all">All recipes</option>
+                    <option value="kerala">🥥 Kerala Kitchen Mode</option>
+                </select>
+            </div>
+
+            <div id="recipeResults" class="recipe-grid"></div>
+        </div>
+
+        <div class="card">
+            <h3>🔄 Ingredient Substitutions</h3>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:14px">
+                Find possible alternatives when an ingredient is missing.
+            </p>
+
+            <label for="subIngredient">Missing ingredient</label>
+            <input id="subIngredient" placeholder="e.g. butter">
+
+            <button class="btn primary" id="findSub">
+                Find alternatives
+            </button>
+
+            <div id="subResults" style="margin-top:20px"></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- SHOPPING -->
+<section id="shopping">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURE 10</span>
+        <h2>🛒 Smart Shopping List</h2>
+        <p>Buy what you need and avoid unnecessary purchases.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Add shopping item</h3>
+
+            <form id="shopForm">
+                <label for="shopName">Item name</label>
+                <input id="shopName" required maxlength="80"
+                       placeholder="e.g. Milk">
+
+                <div class="form-grid">
+                    <div>
+                        <label for="shopQty">Quantity</label>
+                        <input id="shopQty" value="1" required
+                               maxlength="20">
+                    </div>
+
+                    <div>
+                        <label for="shopPrice">Estimated price (₹)</label>
+                        <input id="shopPrice" type="number"
+                               min="0" step="0.01" value="0" required>
+                    </div>
+                </div>
+
+                <button class="btn primary" type="submit">
+                    + Add to list
+                </button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>🧺 Shopping checklist</h3>
+            <div class="green-box">
+                <p>Estimated shopping total</p>
+                <strong id="shopTotal">₹0</strong>
+            </div>
+
+            <div id="shopList" class="list"></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- MEAL PLANNER -->
+<section id="planner">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURE 12</span>
+        <h2>📅 Weekly Meal Planner</h2>
+        <p>Plan breakfast, lunch and dinner for the week.</p>
+    </div>
+
+    <div class="card">
+        <div class="notice">
+            💡 Tip: prioritise suitable ingredients that are approaching
+            their expiry dates when planning meals.
+        </div>
+
+        <div class="form-grid">
+            <div>
+                <label for="mealDay">Day</label>
+                <select id="mealDay">
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="mealType">Meal</label>
+                <select id="mealType">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Snack</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="mealName">Meal name</label>
+        <input id="mealName" placeholder="e.g. Vegetable pulao">
+
+        <button class="btn primary" id="saveMeal">
+            + Add meal
+        </button>
+
+        <div id="mealPlan"
+             style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:25px">
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- SAVINGS -->
+<section id="savings">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURE 05</span>
+        <h2>💰 Your Money-Saving Tracker</h2>
+        <p>See the estimated value of food you've used instead of wasting.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>💚 Total estimated savings</h3>
+            <div class="green-box">
+                <strong id="savingAmount">₹0</strong>
+                <p>Value of food marked as used</p>
+            </div>
+            <p style="font-size:13px;color:var(--muted)">
+                This is an estimate based on the food values you enter.
+                It is not a guarantee of money saved.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📈 Your progress</h3>
+            <p>Food items used</p>
+            <h2 id="usedCount" style="color:var(--green)">0</h2>
+
+            <p style="margin-top:15px">Food items currently in your pantry</p>
+            <h2 id="currentCount" style="color:var(--green)">0</h2>
+
+            <p style="margin-top:15px">Challenge points earned</p>
+            <h2 id="savingPoints" style="color:var(--green)">0</h2>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- CHALLENGE -->
+<section id="challenge">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">FEATURE 13</span>
+        <h2>🏆 The Leftover Challenge</h2>
+        <p>Make reducing food waste a rewarding habit.</p>
+    </div>
+
+    <div class="challenge">
+        <div class="score"><span id="challengePoints">0</span> points 🌟</div>
+        <h3>Every ingredient counts!</h3>
+        <p>
+            Use food from your pantry, mark it as used, and earn
+            points for your progress.
+        </p>
+
+        <button class="btn" id="challengeButton">
+            Complete a food-saving challenge +10
+        </button>
+
+        <p style="font-size:12px;margin-top:15px">
+            Challenge points are separate from your estimated money savings.
+        </p>
+    </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<div class="container">
+    <div class="section-head">
+        <span class="eyebrow">ABOUT FOODLOOP</span>
+        <h2>A small change can make a big difference 🌍</h2>
+        <p>
+            FoodLoop helps people manage their kitchen, use ingredients
+            thoughtfully and build food-saving habits.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature">
+            <span>📊</span>
+            <h3>Smart Dashboard</h3>
+            <p>See your pantry and savings at a glance.</p>
+        </div>
+
+        <div class="feature">
+            <span>🥬</span>
+            <h3>Food Inventory</h3>
+            <p>Organise your food and quantities.</p>
+        </div>
+
+        <div class="feature">
+            <span>⏰</span>
+            <h3>Expiry Tracker</h3>
+            <p>Keep track of dates and reminders.</p>
+        </div>
+
+        <div class="feature">
+            <span>🔔</span>
+            <h3>Food Alerts</h3>
+            <p>See items needing attention.</p>
+        </div>
+
+        <div class="feature">
+            <span>💰</span>
+            <h3>Money Savings</h3>
+            <p>Estimate the value of food used.</p>
+        </div>
+
+        <div class="feature">
+            <span>✅</span>
+            <h3>Mark as Used</h3>
+            <p>Update inventory and savings.</p>
+        </div>
+
+        <div class="feature">
+            <span>🍳</span>
+            <h3>Recipe Generator</h3>
+            <p>Explore ideas using ingredients.</p>
+        </div>
+
+        <div class="feature">
+            <span>🎲</span>
+            <h3>Surprise Me</h3>
+            <p>Discover a random recipe idea.</p>
+        </div>
+
+        <div class="feature">
+            <span>🥥</span>
+            <h3>Kerala Kitchen</h3>
+            <p>Explore Kerala-style food ideas.</p>
+        </div>
+
+        <div class="feature">
+            <span>🛒</span>
+            <h3>Shopping List</h3>
+            <p>Keep your shopping organised.</p>
+        </div>
+
+        <div class="feature">
+            <span>🔄</span>
+            <h3>Substitutions</h3>
+            <p>Find possible ingredient alternatives.</p>
+        </div>
+
+        <div class="feature">
+            <span>📅</span>
+            <h3>Meal Planner</h3>
+            <p>Organise meals for seven days.</p>
+        </div>
+
+        <div class="feature">
+            <span>🏆</span>
+            <h3>Leftover Challenge</h3>
+            <p>Earn points for food-saving habits.</p>
+        </div>
+
+        <div class="feature">
+            <span>💾</span>
+            <h3>Data Saving</h3>
+            <p>Keep your progress in your browser.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+    <div class="logo" style="color:white">🌿 Food<span>Loop</span></div>
+    <p>Save Food. Save Money. Live Better.</p>
+    <p>Made with 💚 for a greener kitchen.</p>
+    <p>© <span id="year"></span> FoodLoop Student Project</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* =========================================
+   FOODLOOP DATA AND AUTOMATIC BROWSER SAVING
+========================================= */
+
+const STORAGE_KEY = "foodloop_complete_v1";
+
+const defaultData = {
+    foods: [],
+    shopping: [],
+    meals: {},
+    savings: 0,
+    points: 0,
+    usedCount: 0,
+    completedChallenges: [],
+    nextId: 1
+};
+
+let data = loadData();
+
+function loadData() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (!saved) return structuredClone(defaultData);
+
+        const parsed = JSON.parse(saved);
+
+        return {
+            ...structuredClone(defaultData),
+            ...parsed,
+            foods: Array.isArray(parsed.foods) ? parsed.foods : [],
+            shopping: Array.isArray(parsed.shopping) ? parsed.shopping : [],
+            meals: parsed.meals && typeof parsed.meals === "object"
+                ? parsed.meals : {},
+            completedChallenges: Array.isArray(parsed.completedChallenges)
+                ? parsed.completedChallenges : []
+        };
+    } catch (error) {
+        return structuredClone(defaultData);
+    }
+}
+
+function saveData() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+        notify("Browser storage is unavailable. Your changes may not persist.");
+    }
+}
+
+function makeId() {
+    return data.nextId++;
+}
+
+function notify(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    clearTimeout(notify.timer);
+    notify.timer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 2600);
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function money(value) {
+    return "₹" + Number(value || 0).toLocaleString("en-IN", {
+        maximumFractionDigits: 2
+    });
+}
+
+function todayString() {
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+}
+
+function daysUntil(dateString) {
+    const target = new Date(dateString + "T00:00:00");
+    const today = new Date(todayString() + "T00:00:00");
+
+    return Math.round((target - today) / 86400000);
+}
+
+function expiryStatus(food) {
+    const days = daysUntil(food.expiry);
+
+    if (days < 0) {
+        return {
+            label: "Past expiry date",
+            className: "danger-badge",
+            days
+        };
+    }
+
+    if (days === 0) {
+        return {
+            label: "Date is today",
+            className: "warning",
+            days
+        };
+    }
+
+    if (days <= 3) {
+        return {
+            label: "Expiring soon",
+            className: "warning",
+            days
+        };
+    }
+
+    return {
+        label: "Upcoming",
+        className: "",
+        days
+    };
+}
+
+/* =========================================
+   DASHBOARD AND EXPIRY ALERTS
+========================================= */
+
+function renderDashboard() {
+    const active = data.foods.filter(food => !food.used);
+
+    const expiring = active.filter(food => {
+        const days = daysUntil(food.expiry);
+        return days >= 0 && days <= 3;
+    });
+
+    document.getElementById("statFood").textContent = active.length;
+    document.getElementById("statExpiry").textContent = expiring.length;
+    document.getElementById("statSavings").textContent = money(data.savings);
+    document.getElementById("statPoints").textContent = data.points;
+
+    document.getElementById("savingAmount").textContent = money(data.savings);
+    document.getElementById("usedCount").textContent = data.usedCount;
+    document.getElementById("currentCount").textContent = active.length;
+    document.getElementById("savingPoints").textContent = data.points;
+    document.getElementById("challengePoints").textContent = data.points;
+
+    const alerts = active
+        .map(food => ({ food, status: expiryStatus(food) }))
+        .filter(item => item.status.days <= 3)
+        .sort((a, b) => a.status.days - b.status.days);
+
+    const target = document.getElementById("dashboardAlerts");
+
+    if (!alerts.length) {
+        target.innerHTML = `
+            <div class="empty">
+                🌱 No urgent expiry alerts. Add food items to start tracking.
+            </div>`;
+        return;
+    }
+
+    target.innerHTML = alerts.map(({food, status}) => `
+        <div class="item">
+            <div class="item-main">
+                <strong>${escapeHTML(food.name)}</strong>
+                <small>
+                    ${status.days < 0
+                        ? "Date passed " + Math.abs(status.days) + " day(s) ago"
+                        : status.days === 0
+                            ? "Entered date is today"
+                            : "Date in " + status.days + " day(s)"}
+                </small>
+            </div>
+            <span class="badge ${status.className}">
+                ${escapeHTML(status.label)}
+            </span>
+        </div>
+    `).join("");
+}
+
+function renderExpiry() {
+    const target = document.getElementById("expiryList");
+
+    const active = data.foods.filter(food => !food.used);
+
+    if (!active.length) {
+        target.innerHTML = `<div class="empty">
+            Your expiry tracker is empty. Add food in My Pantry.
+        </div>`;
+        return;
+    }
+
+    target.innerHTML = active
+        .slice()
+        .sort((a, b) => daysUntil(a.expiry) - daysUntil(b.expiry))
+        .map(food => {
+            const status = expiryStatus(food);
+
+            let message;
+
+            if (status.days < 0) {
+                message = `Entered date passed ${Math.abs(status.days)} day(s) ago.`;
+            } else if (status.days === 0) {
+                message = "Entered date is today.";
+            } else {
+                message = `${status.days} day(s) until the entered date.`;
+            }
+
+            return `
+                <div class="item">
+                    <div class="item-main">
+                        <strong>${escapeHTML(food.name)}</strong>
+                        <small>${escapeHTML(food.expiry)} · ${escapeHTML(message)}</small>
+                    </div>
+                    <span class="badge ${status.className}">
+                        ${escapeHTML(status.label)}
+                    </span>
+                </div>
+            `;
+        }).join("");
+}
+
+/* =========================================
+   FOOD INVENTORY: ADD, EDIT, DELETE, USE
+========================================= */
+
+function resetFoodForm() {
+    document.getElementById("foodForm").reset();
+    document.getElementById("foodId").value = "";
+    document.getElementById("foodQty").value = "1";
+    document.getElementById("foodFormTitle").textContent = "Add a food item";
+    document.getElementById("foodSubmit").textContent = "+ Add Food";
+    document.getElementById("foodCancel").hidden = true;
+}
+
+document.getElementById("foodForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const idValue = document.getElementById("foodId").value;
+    const name = document.getElementById("foodName").value.trim();
+    const category = document.getElementById("foodCategory").value;
+    const qty = Number(document.getElementById("foodQty").value);
+    const price = Number(document.getElementById("foodPrice").value);
+    const expiry = document.getElementById("foodExpiry").value;
+
+    if (!name || !Number.isFinite(qty) || qty <= 0 ||
+        !Number.isFinite(price) || price < 0 || !expiry) {
+        notify("Please enter valid food details.");
+        return;
+    }
+
+    if (expiry < todayString()) {
+        if (!confirm("This date is in the past. Add the item anyway?")) {
+            return;
+        }
+    }
+
+    if (idValue) {
+        const food = data.foods.find(item => item.id === Number(idValue));
+
+        if (!food || food.used) {
+            notify("This item can no longer be edited.");
+            return;
+        }
+
+        food.name = name;
+        food.category = category;
+        food.qty = qty;
+        food.price = price;
+        food.expiry = expiry;
+
+        notify("Food item updated!");
+    } else {
+        data.foods.push({
+            id: makeId(),
+            name,
+            category,
+            qty,
+            price,
+            expiry,
+            used: false
+        });
+
+        notify("Food added to your pantry!");
+    }
+
+    saveData();
+    resetFoodForm();
+    renderAll();
+});
+
+document.getElementById("foodCancel").addEventListener("click", resetFoodForm);
+
+function editFood(id) {
+    const food = data.foods.find(item => item.id === id);
+
+    if (!food || food.used) return;
+
+    document.getElementById("foodId").value = food.id;
+    document.getElementById("foodName").value = food.name;
+    document.getElementById("foodCategory").value = food.category;
+    document.getElementById("foodQty").value = food.qty;
+    document.getElementById("foodPrice").value = food.price;
+    document.getElementById("foodExpiry").value = food.expiry;
+
+    document.getElementById("foodFormTitle").textContent = "Edit food item";
+    document.getElementById("foodSubmit").textContent = "Save changes";
+    document.getElementById("foodCancel").hidden = false;
+
+    document.getElementById("pantry").scrollIntoView();
+}
+
+function markFoodUsed(id) {
+    const food = data.foods.find(item => item.id === id);
+
+    if (!food || food.used) return;
+
+    if (daysUntil(food.expiry) < 0) {
+        if (!confirm(
+            "The entered expiry date has passed. Confirm that the food is safe to use before marking it as used."
+        )) {
+            return;
+        }
+    }
+
+    if (!confirm(
+        `Mark ${food.name} as used? Its entered value of ${money(food.price)} will be counted as estimated savings.`
+    )) {
+        return;
+    }
+
+    food.used = true;
+    data.savings += food.price;
+    data.usedCount += 1;
+    data.points += 10;
+
+    saveData();
+    renderAll();
+    notify("Food marked as used! +10 challenge points 🌟");
+}
+
+function deleteFood(id) {
+    const food = data.foods.find(item => item.id === id);
+
+    if (!food) return;
+
+    if (!confirm(`Delete ${food.name} from your inventory?`)) return;
+
+    data.foods = data.foods.filter(item => item.id !== id);
+
+    saveData();
+    renderAll();
+    notify("Food item deleted.");
+}
+
+function renderFoods() {
+    const target = document.getElementById("foodList");
+    const search = document.getElementById("foodSearch").value.trim().toLowerCase();
+    const filter = document.getElementById("foodFilter").value;
+
+    let foods = data.foods.filter(food =>
+        food.name.toLowerCase().includes(search) ||
+        food.category.toLowerCase().includes(search)
+    );
+
+    if (filter === "expired") {
+        foods = foods.filter(food => !food.used && daysUntil(food.expiry) < 0);
+    } else if (filter === "expiring") {
+        foods = foods.filter(food => {
+            const days = daysUntil(food.expiry);
+            return !food.used && days >= 0 && days <= 3;
+        });
+    }
+
+    if (!foods.length) {
+        target.innerHTML = `<div class="empty">
+            No matching food items. Add food using the form.
+        </div>`;
+        return;
+    }
+
+    target.innerHTML = foods.map(food => {
+        const status = expiryStatus(food);
+
+        return `
+            <div class="item">
+                <div class="item-main">
+                    <strong>
+                        ${escapeHTML(food.name)}
+                        ${food.used ? '<span class="badge">Used</span>' : ''}
+                    </strong>
+
+                    <small>
+                        ${escapeHTML(food.category)} ·
+                        Quantity: ${escapeHTML(food.qty)} ·
+                        Value: ${money(food.price)}
+                    </small>
+
+                    <small>Entered date: ${escapeHTML(food.expiry)}</small>
+
+                    ${!food.used ? `
+                        <span class="badge ${status.className}" style="margin-top:7px">
+                            ${escapeHTML(status.label)}
+                        </span>
+                    ` : ''}
+                </div>
+
+                <div class="item-actions">
+                    ${!food.used ? `
+                        <button class="small-btn secondary"
+                                data-action="use" data-id="${food.id}">
+                            ✓ Used
+                        </button>
+
+                        <button class="small-btn orange"
+                                data-action="edit" data-id="${food.id}">
+                            Edit
+                        </button>
+                    ` : ''}
+
+                    <button class="small-btn danger"
+                            data-action="delete" data-id="${food.id}">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+document.getElementById("foodList").addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const id = Number(button.dataset.id);
+
+    if (button.dataset.action === "use") markFoodUsed(id);
+    if (button.dataset.action === "edit") editFood(id);
+    if (button.dataset.action === "delete") deleteFood(id);
+});
+
+document.getElementById("foodSearch").addEventListener("input", renderFoods);
+document.getElementById("foodFilter").addEventListener("change", renderFoods);
+
+/* =========================================
+   RECIPE GENERATOR + SURPRISE + KERALA MODE
+========================================= */
+
+const recipes = [
+    {
+        name: "Vegetable Fried Rice",
+        emoji: "🍚",
+        ingredients: ["rice", "carrot", "beans", "onion"],
+        mode: "all",
+        steps: "Cook rice. Sauté chopped vegetables, add rice and season to taste."
+    },
+    {
+        name: "Potato Curry",
+        emoji: "🥔",
+        ingredients: ["potato", "onion", "tomato"],
+        mode: "all",
+        steps: "Cook potatoes. Prepare an onion and tomato base, then combine."
+    },
+    {
+        name: "Vegetable Omelette",
+        emoji: "🍳",
+        ingredients: ["egg", "onion", "tomato"],
+        mode: "all",
+        steps: "Beat eggs, add chopped vegetables and cook thoroughly in a pan."
+    },
+    {
+        name: "Banana Pancakes",
+        emoji: "🥞",
+        ingredients: ["banana", "flour", "milk"],
+        mode: "all",
+        steps: "Mash banana, mix with flour and enough milk, then cook small pancakes."
+    },
+    {
+        name: "Tomato Soup",
+        emoji: "🍅",
+        ingredients: ["tomato", "onion", "garlic"],
+        mode: "all",
+        steps: "Cook tomatoes, onion and garlic, blend carefully and season."
+    },
+    {
+        name: "Kerala Vegetable Thoran",
+        emoji: "🥥",
+        ingredients: ["cabbage", "carrot", "coconut"],
+        mode: "kerala",
+        steps: "Stir-fry chopped vegetables with grated coconut and suitable spices."
+    },
+    {
+        name: "Kerala Avial",
+        emoji: "🥕",
+        ingredients: ["carrot", "potato", "beans", "coconut"],
+        mode: "kerala",
+        steps: "Cook suitable mixed vegetables and combine with coconut and yoghurt."
+    },
+    {
+        name: "Vegetable Upma",
+        emoji: "🍲",
+        ingredients: ["rava", "onion", "carrot"],
+        mode: "kerala",
+        steps: "Roast rava, sauté vegetables, add water and cook until soft."
+    },
+    {
+        name: "Appam and Vegetable Stew",
+        emoji: "🥥",
+        ingredients: ["rice", "coconut", "potato", "carrot"],
+        mode: "kerala",
+        steps: "Prepare a coconut-based vegetable stew. Serve with separately prepared appam."
+    },
+    {
+        name: "Puttu and Banana",
+        emoji: "🍌",
+        ingredients: ["rice", "coconut", "banana"],
+        mode: "kerala",
+        steps: "Prepare puttu using puttu flour and coconut. Serve with ripe banana."
+    }
+];
+
+function getRecipeInput() {
+    const typed = document.getElementById("recipeIngredients").value
+        .toLowerCase()
+        .split(",")
+        .map(value => value.trim())
+        .filter(Boolean);
+
+    if (typed.length) return typed;
+
+    return data.foods
+        .filter(food => !food.used)
+        .map(food => food.name.toLowerCase());
+}
+
+function matchingRecipes() {
+    const ingredients = getRecipeInput();
+    const mode = document.getElementById("recipeMode").value;
+
+    let results = recipes.filter(recipe =>
+        mode === "kerala" ? recipe.mode === "kerala" : true
+    );
+
+    if (ingredients.length) {
+        const scored = results.map(recipe => ({
+            recipe,
+            score: recipe.ingredients.filter(ingredient =>
+                ingredients.some(item =>
+                    item.includes(ingredient) || ingredient.includes(item)
+                )
+            ).length
+        }));
+
+        scored.sort((a, b) => b.score - a.score);
+
+        return scored.filter(item => item.score > 0)
+            .slice(0, 6)
+            .map(item => item.recipe);
+    }
+
+    return results.slice(0, 6);
+}
+
+function renderRecipes(results) {
+    const target = document.getElementById("recipeResults");
+
+    if (!results.length) {
+        target.innerHTML = `<div class="empty" style="grid-column:1/-1">
+            No exact matches. Try ingredients such as potato, onion,
+            tomato, banana, coconut or rice.
+        </div>`;
+        return;
+    }
+
+    target.innerHTML = results.map(recipe => `
+        <div class="recipe">
+            <div class="emoji">${recipe.emoji}</div>
+            <h4>${escapeHTML(recipe.name)}</h4>
+
+            <small>
+                <strong>Ingredients:</strong>
+                ${escapeHTML(recipe.ingredients.join(", "))}
+            </small>
+
+            <p>${escapeHTML(recipe.steps)}</p>
+            <span class="badge">Built-in recipe idea</span>
+        </div>
+    `).join("");
+}
+
+document.getElementById("generateRecipes").addEventListener("click", () => {
+    renderRecipes(matchingRecipes());
+});
+
+document.getElementById("surpriseRecipe").addEventListener("click", () => {
+    const results = matchingRecipes();
+
+    if (!results.length) {
+        notify("Try different ingredients to find a recipe.");
+        return;
+    }
+
+    const chosen = results[Math.floor(Math.random() * results.length)];
+    renderRecipes([chosen]);
+    notify("Your surprise recipe is " + chosen.name + "!");
+});
+
+document.getElementById("recipeMode").addEventListener("change", () => {
+    renderRecipes(matchingRecipes());
+});
+
+/* =========================================
+   INGREDIENT SUBSTITUTIONS
+========================================= */
+
+const substitutions = {
+    "butter": ["Margarine", "Suitable cooking oil in some recipes"],
+    "milk": ["Unsweetened soy milk", "Oat milk"],
+    "egg": ["Flaxseed and water for some baked recipes", "Commercial egg replacer"],
+    "coconut milk": ["Unsweetened plant milk for some dishes", "Blended coconut and water"],
+    "lemon": ["Lime juice", "A suitable vinegar in some savoury dishes"],
+    "lime": ["Lemon juice"],
+    "tomato": ["A suitable red pepper-based alternative in some cooked dishes"],
+    "cream": ["Unsweetened coconut cream in suitable recipes", "Plain yoghurt in some dishes"],
+    "yogurt": ["A suitable unsweetened plant-based yoghurt"],
+    "rice": ["Quinoa", "Bulgur wheat"],
+    "potato": ["Sweet potato", "Turnip in some recipes"],
+    "coriander": ["Parsley for a different flavour"],
+    "cumin": ["A small amount of ground coriander, depending on the dish"],
+    "flour": ["A suitable gluten-free flour blend, depending on the recipe"],
+    "onion": ["Spring onion", "A suitable amount of asafoetida in some dishes"],
+    "garlic": ["Garlic-infused oil, where suitable"],
+    "paneer": ["Firm tofu"],
+    "fish": ["Firm tofu in some recipes"],
+    "coconut": ["Unsweetened coconut flakes where appropriate"],
+    "rava": ["A suitable grain-based alternative, depending on the recipe"]
+};
+
+document.getElementById("findSub").addEventListener("click", () => {
+    const ingredient = document.getElementById("subIngredient")
+        .value.trim().toLowerCase();
+
+    const target = document.getElementById("subResults");
+
+    if (!ingredient) {
+        target.innerHTML = `<div class="empty">Enter an ingredient first.</div>`;
+        return;
+    }
+
+    const results = substitutions[ingredient];
+
+    if (!results) {
+        target.innerHTML = `
+            <div class="empty">
+                No built-in suggestion for "${escapeHTML(ingredient)}".
+                Try milk, butter, egg, rice, paneer, potato or coconut milk.
+            </div>`;
+        return;
+    }
+
+    target.innerHTML = `
+        <div class="green-box">
+            <strong style="font-size:17px">
+                Alternatives for ${escapeHTML(ingredient)}
+            </strong>
+            <ul style="padding-left:20px;margin-top:10px">
+                ${results.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+            </ul>
+        </div>
+        <p style="font-size:12px;color:var(--muted)">
+            Substitutions depend on the recipe. Check allergies,
+            dietary needs and food-safety requirements.
+        </p>
+    `;
+});
+
+/* =========================================
+   SHOPPING LIST
+========================================= */
+
+document.getElementById("shopForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const name = document.getElementById("shopName").value.trim();
+    const qty = document.getElementById("shopQty").value.trim();
+    const price = Number(document.getElementById("shopPrice").value);
+
+    if (!name || !qty || !Number.isFinite(price) || price < 0) {
+        notify("Enter valid shopping item details.");
+        return;
+    }
+
+    data.shopping.push({
+        id: makeId(),
+        name,
+        qty,
+        price,
+        checked: false
+    });
+
+    saveData();
+    event.target.reset();
+    document.getElementById("shopQty").value = "1";
+    document.getElementById("shopPrice").value = "0";
+
+    renderShopping();
+    notify("Added to your shopping list!");
+});
+
+function renderShopping() {
+    const target = document.getElementById("shopList");
+
+    const total = data.shopping
+        .filter(item => !item.checked)
+        .reduce((sum, item) => sum + item.price, 0);
+
+    document.getElementById("shopTotal").textContent = money(total);
+
+    if (!data.shopping.length) {
+        target.innerHTML = `<div class="empty">
+            Your shopping list is empty.
+        </div>`;
+        return;
+    }
+
+    target.innerHTML = data.shopping.map(item => `
+        <div class="item">
+            <div class="item-main">
+                <strong style="${item.checked ? 'text-decoration:line-through;color:#89968d' : ''}">
+                    ${escapeHTML(item.name)}
+                </strong>
+                <small>
+                    Quantity: ${escapeHTML(item.qty)} · ${money(item.price)}
+                </small>
+                ${item.checked ? '<span class="badge">Purchased</span>' : ''}
+            </div>
+
+            <div class="item-actions">
+                <button class="small-btn secondary"
+                        data-shop-action="toggle" data-id="${item.id}">
+                    ${item.checked ? 'Undo' : '✓ Bought'}
+                </button>
+
+                <button class="small-btn danger"
+                        data-shop-action="delete" data-id="${item.id}">
+                    Delete
+                </button>
+            </div>
+        </div>
+    `).join("");
+}
+
+document.getElementById("shopList").addEventListener("click", event => {
+    const button = event.target.closest("button[data-shop-action]");
+    if (!button) return;
+
+    const id = Number(button.dataset.id);
+    const item = data.shopping.find(entry => entry.id === id);
+
+    if (!item) return;
+
+    if (button.dataset.shopAction === "toggle") {
+        item.checked = !item.checked;
+    } else {
+        data.shopping = data.shopping.filter(entry => entry.id !== id);
+    }
+
+    saveData();
+    renderShopping();
+});
+
+/* =========================================
+   WEEKLY MEAL PLANNER
+========================================= */
+
+const days = [
+    "Monday", "Tuesday", "Wednesday", "Thursday",
+    "Friday", "Saturday", "Sunday"
+];
+
+const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack"];
+
+document.getElementById("saveMeal").addEventListener("click", () => {
+    const day = document.getElementById("mealDay").value;
+    const type = document.getElementById("mealType").value;
+    const name = document.getElementById("mealName").value.trim();
+
+    if (!name) {
+        notify("Enter a meal name first.");
+        return;
+    }
+
+    if (!data.meals[day]) data.meals[day] = {};
+
+    data.meals[day][type] = name;
+
+    saveData();
+    document.getElementById("mealName").value = "";
+
+    renderMeals();
+    notify("Meal added to your weekly plan!");
+});
+
+function renderMeals() {
+    const target = document.getElementById("mealPlan");
+
+    target.innerHTML = days.map(day => {
+        const meals = data.meals[day] || {};
+
+        return `
+            <div class="day-card">
+                <h4>${day}</h4>
+
+                ${mealTypes.map(type => `
+                    <div style="font-size:12px;margin-bottom:10px">
+                        <strong>${type}:</strong><br>
+                        ${
+                            meals[type]
+                            ? escapeHTML(meals[type])
+                            : '<span style="color:#9aa59d">Not planned</span>'
+                        }
+
+                        ${meals[type] ? `
+                            <button class="small-btn danger"
+                                style="margin-top:4px"
+                                data-meal-day="${day}"
+                                data-meal-type="${type}">
+                                Remove
+                            </button>
+                        ` : ''}
+                    </div>
+                `).join("")}
+            </div>
+        `;
+    }).join("");
+}
+
+document.getElementById("mealPlan").addEventListener("click", event => {
+    const button = event.target.closest("button[data-meal-day]");
+    if (!button) return;
+
+    const day = button.dataset.mealDay;
+    const type = button.dataset.mealType;
+
+    if (data.meals[day]) {
+        delete data.meals[day][type];
+
+        if (!Object.keys(data.meals[day]).length) {
+            delete data.meals[day];
+        }
+    }
+
+    saveData();
+    renderMeals();
+    notify("Meal removed.");
+});
+
+/* =========================================
+   LEFTOVER CHALLENGE
+========================================= */
+
+document.getElementById("challengeButton").addEventListener("click", () => {
+    const today = todayString();
+
+    if (data.completedChallenges.includes(today)) {
+        notify("You've completed today's challenge already. Come back tomorrow!");
+        return;
+    }
+
+    data.completedChallenges.push(today);
+    data.points += 10;
+
+    saveData();
+    renderDashboard();
+
+    notify("Challenge completed! You earned 10 points! 🏆");
+});
+
+/* =========================================
+   RENDER ALL FEATURES
+========================================= */
+
+function renderAll() {
+    renderDashboard();
+    renderFoods();
+    renderExpiry();
+    renderShopping();
+    renderMeals();
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderAll();
+renderRecipes(matchingRecipes());
+</script>
+
+</body>
+</html>
