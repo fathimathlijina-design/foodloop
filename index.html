@@ -2132,6 +2132,15 @@ document.addEventListener("click", event => {
     }
 });
 </script>
+    <script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(() => console.log("FoodLoop app is ready!"))
+            .catch(error => console.error("Service worker registration failed:", error));
+    });
+}
+</script>
 
 </body>
 </html>
