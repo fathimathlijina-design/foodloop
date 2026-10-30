@@ -674,6 +674,7 @@ nav a.active {
             <a href="#shopping">Shopping</a>
             <a href="#planner">Meal Planner</a>
             <a href="#savings">Savings</a>
+            <a href="#challenge">Challenge</a>
             <a href="#about">About</a>
         </nav>
     </div>
@@ -2101,18 +2102,21 @@ function showPage(pageId) {
     const page = document.getElementById(pageId);
 
     if (!page || !page.matches("main > section")) {
-        return;
+        pageId = "home";
     }
 
     document.querySelectorAll("main > section").forEach(section => {
-        section.classList.remove("is-active");
+        section.classList.toggle(
+            "is-active",
+            section.id === pageId
+        );
     });
 
-    page.classList.add("is-active");
-
     document.querySelectorAll("nav a").forEach(link => {
-        const active = link.getAttribute("href") === "#" + pageId;
-        link.classList.toggle("active", active);
+        link.classList.toggle(
+            "active",
+            link.getAttribute("href") === "#" + pageId
+        );
     });
 
     window.scrollTo(0, 0);
@@ -2128,9 +2132,33 @@ document.addEventListener("click", event => {
 
     if (page && page.matches("main > section")) {
         event.preventDefault();
+        history.pushState(null, "", "#" + pageId);
         showPage(pageId);
     }
 });
+
+window.addEventListener("popstate", () => {
+    showPage(location.hash.slice(1) || "home");
+});
+
+// Start FoodLoop
+renderAll();
+
+const requestedPage = location.hash.slice(1);
+const requestedElement = document.getElementById(requestedPage);
+
+const firstPage = requestedElement &&
+    requestedElement.matches("main > section")
+        ? requestedPage
+        : "home";
+
+showPage(firstPage);
+
+if (location.hash !== "#" + firstPage) {
+    history.replaceState(null, "", "#" + firstPage);
+}
+
+
 </script>
     <script>
 if ("serviceWorker" in navigator) {
